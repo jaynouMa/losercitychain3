@@ -1,3 +1,5 @@
+package src;
+
 import java.util.Date;
 
 public class Block {
@@ -10,5 +12,15 @@ public class Block {
         this.info = info;
         this.previousHash = previousHash;
         timeStamp = new Date().getTime();
+        this.hash = calculateHash();
+    }
+
+    public String calculateHash() {
+        String calculatedhash = StringUtil.applySha256(
+                previousHash +
+                        Long.toString(timeStamp) +
+                        info
+        );
+        return calculatedhash;
     }
 }
